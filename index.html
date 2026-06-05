@@ -132,6 +132,7 @@
   section:nth-child(4) { animation-delay: 0.3s; }
   section:nth-child(5) { animation-delay: 0.4s; }
   section:nth-child(6) { animation-delay: 0.5s; }
+  section:nth-child(7) { animation-delay: 0.6s; }
 
   .section-label {
     font-family: var(--mono);
@@ -155,19 +156,34 @@
   .about-text p { margin-bottom: 0.9rem; font-size: 1.05rem; color: #2a2a3e; }
   .about-text p:last-child { margin-bottom: 0; }
 
+  /* ── ENTRY (Research Experience & Education) ── */
   .entry {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.2rem;
     padding: 1.2rem 0;
     border-bottom: 1px solid var(--rule);
+    align-items: start;
   }
 
   .entry:last-child { border-bottom: none; }
 
+  .entry-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .entry-body { flex: 1; }
+
   .entry-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
   .entry-org { font-style: italic; color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
   .entry-desc { font-size: 0.95rem; color: #3a3a4e; line-height: 1.6; }
+  .entry-meta { font-size: 0.88rem; color: #3a3a4e; margin-top: 0.3rem; }
+  .entry-meta span { margin-right: 1rem; }
 
   .entry-date {
     font-family: var(--mono);
@@ -178,6 +194,7 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── PUBLICATIONS ── */
   .pub-entry {
     padding: 1.1rem 0;
     border-bottom: 1px solid var(--rule);
@@ -211,6 +228,7 @@
   .pub-journal a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-light); transition: border-color 0.2s; }
   .pub-journal a:hover { border-color: var(--accent); }
 
+  /* ── SKILLS ── */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -272,6 +290,7 @@
     .header-inner { grid-template-columns: 1fr; }
     .photo-wrap { order: -1; }
     .entry { grid-template-columns: 1fr; }
+    .entry-logo { display: none; }
     .entry-date { padding-top: 0; }
     h1 { font-size: 2.2rem; }
   }
@@ -316,7 +335,8 @@
     <div class="section-label">Research Experience</div>
 
     <div class="entry">
-      <div>
+      <img class="entry-logo" src="IITD.png" alt="IIT Delhi"/>
+      <div class="entry-body">
         <div class="entry-title">Summer Research Intern</div>
         <div class="entry-org">Indian Institute of Technology Delhi</div>
         <div class="entry-desc">Investigating membership inference and data leakage attacks on SciML/PINN models. Completed study of neural operators (FNO, NCWNO) and adversarial vulnerability frameworks; building toward robustness evaluation and defense design for physics-informed systems.</div>
@@ -325,12 +345,32 @@
     </div>
 
     <div class="entry">
-      <div>
+      <img class="entry-logo" src="BITS.png" alt="BITS Pilani"/>
+      <div class="entry-body">
         <div class="entry-title">Research Collaborator</div>
         <div class="entry-org">BITS Pilani &mdash; Remote; 10-day fully funded campus visit</div>
-        <div class="entry-desc">Developed a fractional-order SEIRV contagion model for an epidemic outspread; introduced a vaccinated class and identified backward bifurcation via two endemic equilibrium points. Applied PINNs for parameter estimation.</div>
+        <div class="entry-desc">Developed a fractional-order SEIRV contagion model for financial markets; introduced a Vigilant investor class and identified backward bifurcation via two endemic equilibrium points. Applied PINNs for parameter estimation. Have published and worked with faculty across BITS Pilani, VIT-AP University, and Covenant University, Nigeria.</div>
       </div>
       <div class="entry-date">Aug 2025 – Present</div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Education</div>
+
+    <div class="entry">
+      <img class="entry-logo" src="BIT.png" alt="BIT Mesra"/>
+      <div class="entry-body">
+        <div class="entry-title">Birla Institute of Technology, Mesra</div>
+        <div class="entry-org">Integrated M.Sc. in Mathematics &amp; Computing</div>
+        <div class="entry-meta">
+          <span>CGPA: 9.17/10</span>
+          <span>Department Rank 3 (Batch of 2024)</span>
+        </div>
+        <div class="entry-desc" style="margin-top:0.4rem;">Relevant Coursework: Real &amp; Complex Analysis, ODE/PDE, Linear &amp; Modern Algebra, Numerical Methods, Discrete Mathematics, DSA</div>
+      </div>
+      <div class="entry-date">2024 – 2029</div>
     </div>
   </section>
 
@@ -376,7 +416,6 @@
           <span class="skill-tag">PINNs</span>
           <span class="skill-tag">DeepXDE</span>
           <span class="skill-tag">SINDy</span>
-          <span class="skill-tag">CLINES</span>
           <span class="skill-tag">FNO</span>
           <span class="skill-tag">NCWNO</span>
           <span class="skill-tag">Inverse Problems</span>
@@ -387,7 +426,8 @@
         <div class="skill-tags">
           <span class="skill-tag">Dynamical Systems</span>
           <span class="skill-tag">Stability Analysis</span>
-          <span class="skill-tag">Fractional ODEs/PDEs</span>
+          <span class="skill-tag">Bifurcation Theory</span>
+          <span class="skill-tag">Fractional ODEs</span>
         </div>
       </div>
       <div class="skill-group">
