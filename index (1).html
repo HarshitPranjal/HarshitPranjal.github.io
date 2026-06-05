@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harshit Pranjal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f4ef;
+    --accent: #004f90;
+    --accent-light: #e8f0f8;
+    --muted: #6b6b7b;
+    --rule: #d4cfc8;
+    --serif: 'EB Garamond', Georgia, serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    padding: 4rem 0 2.5rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .header-text h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .header-text .role {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .header-text .tagline {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .photo-wrap { width: 130px; flex-shrink: 0; }
+
+  .photo-wrap img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid var(--ink);
+    display: block;
+    filter: grayscale(15%);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section {
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.2s; }
+  section:nth-child(4) { animation-delay: 0.3s; }
+  section:nth-child(5) { animation-delay: 0.4s; }
+  section:nth-child(6) { animation-delay: 0.5s; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .about-text p { margin-bottom: 0.9rem; font-size: 1.05rem; color: #2a2a3e; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry:last-child { border-bottom: none; }
+
+  .entry-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .entry-org { font-style: italic; color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .entry-desc { font-size: 0.95rem; color: #3a3a4e; line-height: 1.6; }
+
+  .entry-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 0.3rem;
+    letter-spacing: 0.04em;
+  }
+
+  .pub-entry {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .pub-entry:last-child { border-bottom: none; }
+
+  .pub-badge {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.45rem;
+    border-radius: 2px;
+    margin-top: 0.25rem;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  .pub-badge.published { background: #e6f0e6; color: #2d6a2d; border: 1px solid #b8d8b8; }
+  .pub-badge.review { background: #fef6e4; color: #8a6a1a; border: 1px solid #e8d4a0; }
+  .pub-badge.submitted { background: #f0e8f4; color: #6a3a8a; border: 1px solid #d4b8e8; }
+
+  .pub-title { font-style: italic; font-size: 1rem; margin-bottom: 0.25rem; line-height: 1.5; }
+  .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.2rem; }
+  .pub-authors strong { color: var(--ink); }
+  .pub-journal { font-size: 0.88rem; color: var(--accent); }
+  .pub-journal a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-light); transition: border-color 0.2s; }
+  .pub-journal a:hover { border-color: var(--accent); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-group {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    background: var(--accent-light);
+    color: var(--ink);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0 3rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .photo-wrap { order: -1; }
+    .entry { grid-template-columns: 1fr; }
+    .entry-date { padding-top: 0; }
+    h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-text">
+        <div class="role">Mathematics &amp; Computing · BIT Mesra</div>
+        <h1>Harshit Pranjal</h1>
+        <p class="tagline">Undergraduate researcher working at the intersection of Scientific Machine Learning and dynamical systems.</p>
+        <nav class="nav-links">
+          <a href="mailto:imh10019.24@bitmesra.ac.in">Email</a>
+          <a href="https://github.com/HarshitPranjal" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/harshit-pranjal-371741313/" target="_blank">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=TcH1-YQAAAAJ" target="_blank">Google Scholar</a>
+          <a href="https://drive.google.com/file/d/164Bn2YYSOFKeFYQT5RHCqHoCBJ5qol5Y/view?usp=sharing" target="_blank">CV (PDF)</a>
+        </nav>
+      </div>
+      <div class="photo-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1NFtuXiUixA7LCVt_jKQZYacWuQPU1zZd&sz=w400" alt="Harshit Pranjal"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="section-label">About</div>
+    <div class="about-text">
+      <p>I am an undergraduate in Mathematics &amp; Computing at BIT Mesra, India, working on Scientific Machine Learning — specifically Physics-Informed Neural Networks (PINNs) and neural operators for parameter estimation and inverse problems in fractional-order dynamical systems. My work also spans mathematical modeling of complex systems, including stability analysis and bifurcation theory for nonlinear dynamical systems.</p>
+      <p>I published in <em>Chaos, Solitons &amp; Fractals</em> (Q1) in my second year of undergraduate study. I have authored and co-authored papers with faculty at BITS Pilani, VIT-AP University, and Covenant University, Nigeria. I am currently a research intern at IIT Delhi, investigating adversarial robustness and membership inference attacks on SciML models.</p>
+      <p>I am a recipient of the IAS-INSA-NASI Summer Research Fellowship 2026 (Mathematics) and the GP Birla Merit Scholarship.</p>
+    </div>
+  </section>
+
+  <!-- RESEARCH EXPERIENCE -->
+  <section>
+    <div class="section-label">Research Experience</div>
+
+    <div class="entry">
+      <div>
+        <div class="entry-title">Summer Research Intern</div>
+        <div class="entry-org">Indian Institute of Technology Delhi</div>
+        <div class="entry-desc">Investigating membership inference and data leakage attacks on SciML/PINN models. Completed study of neural operators (FNO, NCWNO) and adversarial vulnerability frameworks; building toward robustness evaluation and defense design for physics-informed systems.</div>
+      </div>
+      <div class="entry-date">May – Jul 2026</div>
+    </div>
+
+    <div class="entry">
+      <div>
+        <div class="entry-title">Research Collaborator</div>
+        <div class="entry-org">BITS Pilani &mdash; Remote; 10-day fully funded campus visit</div>
+        <div class="entry-desc">Developed a fractional-order SEIRV contagion model for financial markets; introduced a Vigilant investor class and identified backward bifurcation via two endemic equilibrium points. Applied PINNs for parameter estimation. Have published and worked with faculty across BITS Pilani, VIT-AP University, and Covenant University, Nigeria.</div>
+      </div>
+      <div class="entry-date">Aug 2025 – Present</div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section>
+    <div class="section-label">Publications</div>
+
+    <div class="pub-entry">
+      <span class="pub-badge published">Published</span>
+      <div>
+        <div class="pub-title">Fractional-Order Crime Dynamics: Linear vs. Nonlinear Transmission Models Using Physics-Informed Neural Networks</div>
+        <div class="pub-authors">P. Yadav, <strong>H. Pranjal</strong>, K. Bansal, T. Mathur, S. Agarwal</div>
+        <div class="pub-journal"><em>Chaos, Solitons &amp; Fractals</em>, 209 (2026), 118408 &mdash; <a href="https://doi.org/10.1016/j.chaos.2026.118408" target="_blank">DOI</a></div>
+      </div>
+    </div>
+
+    <div class="pub-entry">
+      <span class="pub-badge review">Under Review</span>
+      <div>
+        <div class="pub-title">A Fractional-Order Model for Tuberculosis: Parameter Estimation via Least Squares and PINNs</div>
+        <div class="pub-authors">P. Yadav, <strong>H. Pranjal</strong>, K. Bansal, T. Mathur, S. Agarwal</div>
+        <div class="pub-journal"><em>Mathematical Medicine and Biology: A Journal of the IMA</em></div>
+      </div>
+    </div>
+
+    <div class="pub-entry">
+      <span class="pub-badge submitted">Submitted</span>
+      <div>
+        <div class="pub-title">Application of Physics-Informed Neural Networks on Fractional-Order Meningitis Model</div>
+        <div class="pub-authors">T. Anake, <strong>H. Pranjal</strong>, D. Ezekiel</div>
+        <div class="pub-journal"><em>Scientific Reports</em>, Springer Nature</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Scientific ML</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PINNs</span>
+          <span class="skill-tag">DeepXDE</span>
+          <span class="skill-tag">SINDy</span>
+          <span class="skill-tag">FNO</span>
+          <span class="skill-tag">NCWNO</span>
+          <span class="skill-tag">Inverse Problems</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Mathematical Modeling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Dynamical Systems</span>
+          <span class="skill-tag">Stability Analysis</span>
+          <span class="skill-tag">Bifurcation Theory</span>
+          <span class="skill-tag">Fractional ODEs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Frameworks & Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">SciPy</span>
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">LaTeX</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Harshit Pranjal &mdash; BIT Mesra, India</span>
+    <span>imh10019.24@bitmesra.ac.in</span>
+  </footer>
+
+</div>
+</body>
+</html>
